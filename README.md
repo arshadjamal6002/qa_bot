@@ -7,8 +7,20 @@ This isn't just another chatbot. It's a fully autonomous Q\&A system built to cu
 
 **Built by Arshad Jamal.**
 
-**(Seriously, you should add a GIF of the app in action here. It'll look awesome.)**
+**Video Demo**
 ![Demo GIF](video.gif)
+
+
+## 💥 The Lowdown: What This Beast Does
+
+  * **Scrapes & Ingests Knowledge:** It starts by acting like a digital librarian with an insatiable appetite, crawling and scraping the *entire* Jupiter Money website.
+  * **Answers the Un-askable:** Ask it anything about products, fees, features, or terms. It uses a Retrieval-Augmented Generation (RAG) pipeline to find the *exact* information and formulate a human-like answer.
+  * **Grounded in Truth:** This bot doesn't make things up. Its knowledge is strictly limited to the data scraped from the website, making its answers reliable and fact-based.
+  * **Shows Its Work:** Not sure if you can trust the answer? The bot provides the source text it used to generate the response. Total transparency.
+  * **Slick, Interactive UI:** No command-line nonsense. A clean, fast, and responsive web app built with Streamlit makes it easy for anyone to use.
+
+-----
+
 
 ### Check out the magic:
 
@@ -21,16 +33,6 @@ This isn't just another chatbot. It's a fully autonomous Q\&A system built to cu
   <br>
   <em>Transparency: See the source of the answers.</em>
 </p>
-
------
-
-## 💥 The Lowdown: What This Beast Does
-
-  * **Scrapes & Ingests Knowledge:** It starts by acting like a digital librarian with an insatiable appetite, crawling and scraping the *entire* Jupiter Money website.
-  * **Answers the Un-askable:** Ask it anything about products, fees, features, or terms. It uses a Retrieval-Augmented Generation (RAG) pipeline to find the *exact* information and formulate a human-like answer.
-  * **Grounded in Truth:** This bot doesn't make things up. Its knowledge is strictly limited to the data scraped from the website, making its answers reliable and fact-based.
-  * **Shows Its Work:** Not sure if you can trust the answer? The bot provides the source text it used to generate the response. Total transparency.
-  * **Slick, Interactive UI:** No command-line nonsense. A clean, fast, and responsive web app built with Streamlit makes it easy for anyone to use.
 
 -----
 
