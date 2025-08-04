@@ -8,6 +8,8 @@ This isn't just another chatbot. It's a fully autonomous Q\&A system built to cu
 **Built by Arshad Jamal.**
 
 **(Seriously, you should add a GIF of the app in action here. It'll look awesome.)**
+![Demo GIF](video.gif)
+
 ### Check out the magic:
 
 <p align="center">
@@ -15,7 +17,7 @@ This isn't just another chatbot. It's a fully autonomous Q\&A system built to cu
   <br>
   <em>The main interface in action.</em>
   <br><br>
-  <img src="screenshots/chatbot.png" alt="Showing source documents" width="600">
+  <img src="screenshots/conversations.png" alt="Showing source documents" width="600">
   <br>
   <em>Transparency: See the source of the answers.</em>
 </p>
