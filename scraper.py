@@ -48,6 +48,77 @@
 #     'https://jupiter.money/legal/communication-guidelines/',
 # ]
 
+
+
+
+
+
+import requests
+from bs4 import BeautifulSoup
+import os
+import time
+
+URL_LIST_FILE = "discovered_urls.txt" 
+OUTPUT_DIR = "data"
+OUTPUT_FILE = os.path.join(OUTPUT_DIR, "scraped_data.txt")
+
+def load_urls_from_file(filepath):
+    """Loads a list of URLs from a text file."""
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            return [line.strip() for line in f if line.strip()]
+    except FileNotFoundError:
+        print(f"❌ Error: The file {filepath} was not found.")
+        print("Please run the crawler.py script first to generate the list of URLs.")
+        return []
+
+def scrape_and_save():
+    """Scrapes text from a list of URLs (from a file) and saves it."""
+    urls = load_urls_from_file(URL_LIST_FILE)
+    if not urls:
+        return 
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+    
+    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+        f.write("") 
+
+    print(f"🚀 Starting scraper for {len(urls)} discovered links...")
+
+    for url in urls:
+        try:
+            print(f"Scraping {url}...")
+            response = requests.get(url, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
+            response.raise_for_status()
+
+            soup = BeautifulSoup(response.content, 'html.parser')
+            text = soup.get_text(separator=' ', strip=True)
+
+            with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
+                f.write(f"\n\n--- Content from {url} ---\n\n")
+                f.write(text)
+            
+            time.sleep(1)
+
+        except requests.RequestException as e:
+            print(f"⚠️  Skipping {url}: {e}")
+
+    print(f"\n✅ Scraping complete! Data saved to {OUTPUT_FILE}")
+
+if __name__ == "__main__":
+    scrape_and_save()
+
+
+
+
+
+
+
+
+
+
+
+
 # OUTPUT_DIR = "data"
 # OUTPUT_FILE = os.path.join(OUTPUT_DIR, "scraped_data.txt")
 
@@ -84,63 +155,3 @@
 # if __name__ == "__main__":
 #     scrape_and_save()
 
-
-
-import requests
-from bs4 import BeautifulSoup
-import os
-import time
-
-# The crawler now provides the URLs.
-URL_LIST_FILE = "discovered_urls.txt" 
-OUTPUT_DIR = "data"
-OUTPUT_FILE = os.path.join(OUTPUT_DIR, "scraped_data.txt")
-
-def load_urls_from_file(filepath):
-    """Loads a list of URLs from a text file."""
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            return [line.strip() for line in f if line.strip()]
-    except FileNotFoundError:
-        print(f"❌ Error: The file {filepath} was not found.")
-        print("Please run the crawler.py script first to generate the list of URLs.")
-        return []
-
-def scrape_and_save():
-    """Scrapes text from a list of URLs (from a file) and saves it."""
-    urls = load_urls_from_file(URL_LIST_FILE)
-    if not urls:
-        return # Stop if no URLs were loaded
-
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-    
-    # Clear the file before starting
-    with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        f.write("") 
-
-    print(f"🚀 Starting scraper for {len(urls)} discovered links...")
-
-    for url in urls:
-        try:
-            print(f"Scraping {url}...")
-            response = requests.get(url, timeout=15, headers={'User-Agent': 'Mozilla/5.0'})
-            response.raise_for_status()
-
-            soup = BeautifulSoup(response.content, 'html.parser')
-            # Your method of getting all text is fine for a first pass
-            text = soup.get_text(separator=' ', strip=True)
-
-            with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
-                f.write(f"\n\n--- Content from {url} ---\n\n")
-                f.write(text)
-            
-            time.sleep(1)
-
-        except requests.RequestException as e:
-            print(f"⚠️  Skipping {url}: {e}")
-
-    print(f"\n✅ Scraping complete! Data saved to {OUTPUT_FILE}")
-
-if __name__ == "__main__":
-    scrape_and_save()

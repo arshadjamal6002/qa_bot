@@ -4,11 +4,8 @@ from urllib.parse import urljoin, urlparse, urlunparse
 import time
 import os
 
-# The starting point for our crawl
 START_URL = "https://jupiter.money/"
-# The exact domain we want to stay on
 ALLOWED_DOMAIN = "jupiter.money"
-# File to save the discovered links
 OUTPUT_FILE = "discovered_urls.txt"
 
 def clean_url(url):
@@ -63,7 +60,6 @@ def crawl_site(start_url):
 
     return sorted(list(visited_urls))
 
-# --- Main execution ---
 if __name__ == "__main__":
     if os.path.exists(OUTPUT_FILE):
         os.remove(OUTPUT_FILE)

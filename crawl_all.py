@@ -3,11 +3,8 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 import time
 
-# The starting point for our crawl
 START_URL = "https://jupiter.money/"
-# The domain we want to stay within
 DOMAIN = "jupiter.money"
-# File to save the discovered links
 OUTPUT_FILE = "discovered_urls.txt"
 
 def crawl_site(start_url):
@@ -28,7 +25,6 @@ def crawl_site(start_url):
 
         print(f"🔗 Visiting: {url}")
         visited_urls.add(url)
-        # Add the valid URL to our final list
         discovered_links.add(url)
 
         try:
@@ -38,13 +34,8 @@ def crawl_site(start_url):
 
             for link in soup.find_all('a', href=True):
                 href = link['href']
-                # Join relative URLs (e.g., '/about-us') with the base URL
                 absolute_link = urljoin(start_url, href)
                 
-                # --- Filtering Logic ---
-                # 1. Check if it's within the same domain
-                # 2. Check if it's not already visited
-                # 3. Check if it's a web page (not a file or mailto link)
                 if (DOMAIN in urlparse(absolute_link).netloc and
                         absolute_link not in visited_urls and
                         absolute_link not in urls_to_visit and
@@ -54,7 +45,7 @@ def crawl_site(start_url):
                     
                     urls_to_visit.add(absolute_link)
 
-            time.sleep(1) # Be respectful to the server
+            time.sleep(1) 
 
         except requests.RequestException as e:
             print(f"❌ Could not fetch {url}: {e}")
@@ -62,7 +53,6 @@ def crawl_site(start_url):
     return sorted(list(discovered_links))
 
 
-# --- Main execution ---
 if __name__ == "__main__":
     final_links = crawl_site(START_URL)
     
